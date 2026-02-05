@@ -1,0 +1,105 @@
+---
+title: "index"
+author: "Liz Kriz"
+date: "2026-02-03"
+output: html_document
+---
+
+# Markdown
+
+Markdown is a way to make fancy documents.
+Make sure you "knit" often -- after every major change -- to mitigate errors.
+Hashtags are how we make section levels of a doc.
+
+## Next level 
+
+### Next level 
+
+#### Next level 
+
+# Basic formatting 
+
+This is **bold** (double astericks). Or *italics*. or `code`.  
+
+- this is the start of a list. 
+- next item. 
+- next item. make sure to have a space at the end of the line.  
+
+1. this is a numbered list. 
+2. second item. 
+
+To add a hyperlink, do `[link text](url)`without backticks. For example, [go here](https://www.sewanee.edu) 
+
+To link sections of your document, do `[link text](#section name)`, without backticks. For example [go here](#markdown). 
+
+To add more vertical space between blocks of text, use this: "&nbsp;" w/o qoutes
+
+&nbsp;
+
+&nbsp;
+
+Should be more space now. 
+
+**To include an image -- fun!**
+first put an image inside the folder where your `Rmd` file is located.
+Then type `![](full_image_filename_here){width = "50%"}
+
+![](../images/desktop_horseshoecrap.jpg){width="50%}
+
+#RMarkdown
+
+`RMarkdown` is just `Markdown` with `R` code woven in. 
+
+You can do R stuff in the same line as text. For example `r 3+3` will show as 6. 
+(It would look like backtick lower case r space then code then backtick). 
+
+You can also do a full multi-line CHUNK of R stuff:
+
+```{r chunk-name }
+#```{r}
+3+3
+#```
+```
+
+**Settings to control how R chunks appear:**
+
+-`eval = TRUE`: which actualy runs the code, if `FALSE` then it shows the code but doesn't run it. 
+
+-`echo = TRUE`: which shows the code; if `FALSE`, then the code can run without being seen.
+
+-`warnings = FALSE`: which will turn off warnings
+
+-`fig.cap="figure caption` adds a figure caption
+
+-`fig.width=7` example of figure width
+
+-`fig.height=4` example of figure height
+```{r, eval=FALSE}
+3+3
+#shown but not evaluated- good to use for troubleshooting
+```
+
+```{r, eval=TRUE, echo=FALSE}
+#This will be evaluated but not shown- behind the scenes coding
+4+4
+```
+
+#Bringing in real data
+
+To manually set working directory while building up markdown file just go to Session > Set working directory > Source file location
+
+```{r read data, }
+library(readr)
+energy<-read_csv("../data/IRENA data.csv", skip=1)
+
+```
+
+```{r explore data, }
+library (dplyr)
+energy %>% names
+energy %>% head
+energy %>% tail
+energy %>% pull (Technology) %>% unique %>% sort
+```
+
+
